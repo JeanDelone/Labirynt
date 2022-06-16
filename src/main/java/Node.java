@@ -1,12 +1,22 @@
+import java.util.ArrayList;
+
 public class Node {
 
     boolean isVisited;
-    int x;
-    int y;
+    int row;
+    int column;
 
-    Node(boolean isVisited, int x, int y){
+    ArrayList<Node> neighbours = new ArrayList<>();
+
+    Node(boolean isVisited, int row, int column){
         this.isVisited = isVisited;
-        this.x = x;
-        this.y = y;
+        this.row = row;
+        this.column = column;
+    }
+
+    @Override
+    public String toString() {
+        return "(r=" + row +
+                ", c=" + column + ")";
     }
 }

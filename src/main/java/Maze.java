@@ -1,24 +1,24 @@
-import java.util.Stack;
-
 public class Maze {
 
-//    width and height
-    private int m = 10;
-    private int n = 10;
-    private Block[][] maze;
+//    columns and rows
+    private int columns = 10;
+    private int rows = 10;
+    public Node[][] maze;
 
     private void generateEmptyGraph(){
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                maze[i][j] = new Block(false, i, j);
+        Node[][] innerMaze = new Node[this.rows][this.columns];
+        for (int row = 0; row < this.rows; row++) {
+            for (int column = 0; column < this.columns; column++) {
+                innerMaze[row][column] = new Node(false, row, column);
             }
         }
+        this.maze = innerMaze;
     }
 
-
     Maze(int width, int height){
-        this.m = width;
-        this.n = height;
+        this.rows = width;
+        this.columns = height;
+        generateEmptyGraph();
     }
 
 
