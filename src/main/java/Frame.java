@@ -14,7 +14,7 @@ public class Frame extends JFrame{
         ImageIcon image = new ImageIcon("Images/delone logo 32x32.png");
         this.setIconImage(image.getImage());
 
-        this.getContentPane().setBackground(new Color(0x5b0474));
+        this.getContentPane().setBackground(new Color(0xe202124));
     }
 
 }
