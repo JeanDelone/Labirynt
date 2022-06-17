@@ -6,17 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Labiryncik" />
-        <module name="Labirynt" />
+        <module name="Labirynt-gui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Labirynt" target="17" />
+      <module name="Labirynt-gui" target="17" />
     </bytecodeTargetLevel>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Labirynt" options="--add-modules java.base,java.desktop" />
-    </option>
   </component>
 </project>
