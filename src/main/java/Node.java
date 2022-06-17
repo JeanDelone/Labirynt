@@ -5,8 +5,8 @@ public class Node {
     boolean isVisited;
     int row;
     int column;
-
     ArrayList<Node> neighbours = new ArrayList<>();
+    ArrayList<Node> edgesTo = new ArrayList<>();
 
     Node(boolean isVisited, int row, int column){
         this.isVisited = isVisited;

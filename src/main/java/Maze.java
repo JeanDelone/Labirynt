@@ -15,10 +15,40 @@ public class Maze {
         this.maze = innerMaze;
     }
 
-    Maze(int width, int height){
-        this.rows = width;
-        this.columns = height;
+    private void generateNeighbours(){
+        for (int row = 0; row < this.rows; row++) {
+            for (int col = 0; col < this.columns; col++) {
+                if(row != 0){
+                    this.maze[row][col].neighbours.add(new Node(false, row - 1, col));
+                }
+                if(row != this.rows - 1){
+                    this.maze[row][col].neighbours.add(new Node(false, row + 1, col));
+                }
+                if(col != 0){
+                    this.maze[row][col].neighbours.add(new Node(false, row, col - 1));
+                }
+                if(col != this.columns - 1){
+                    this.maze[row][col].neighbours.add(new Node(false, row, col + 1));
+                }
+            }
+        }
+    }
+
+    private void DFS(Node actualV){
+        actualV.isVisited = true;
+        for (Node neighbour: actualV.neighbours) {
+            if (!(neighbour.isVisited)){
+                actualV.edgesTo.add(neighbour);
+                DFS(neighbour);
+            }
+        }
+    }
+
+    Maze(int rows, int columns){
+        this.rows = rows;
+        this.columns = columns;
         generateEmptyGraph();
+        generateNeighbours();
     }
 
 
