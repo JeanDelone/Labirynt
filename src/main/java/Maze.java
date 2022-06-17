@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.util.List;
+
 public class Maze {
 
 //    columns and rows
@@ -8,8 +11,8 @@ public class Maze {
     private void generateEmptyGraph(){
         Node[][] innerMaze = new Node[this.rows][this.columns];
         for (int row = 0; row < this.rows; row++) {
-            for (int column = 0; column < this.columns; column++) {
-                innerMaze[row][column] = new Node(false, row, column);
+            for (int col = 0; col < this.columns; col++) {
+                innerMaze[row][col] = new Node(false, row, col);
             }
         }
         this.maze = innerMaze;
@@ -19,26 +22,54 @@ public class Maze {
         for (int row = 0; row < this.rows; row++) {
             for (int col = 0; col < this.columns; col++) {
                 if(row != 0){
-                    this.maze[row][col].neighbours.add(new Node(false, row - 1, col));
+                    this.maze[row][col].neighbours.add(maze[row-1][col]);
                 }
                 if(row != this.rows - 1){
-                    this.maze[row][col].neighbours.add(new Node(false, row + 1, col));
+                    this.maze[row][col].neighbours.add(maze[row+1][col]);
                 }
                 if(col != 0){
-                    this.maze[row][col].neighbours.add(new Node(false, row, col - 1));
+                    this.maze[row][col].neighbours.add(maze[row][col-1]);
                 }
                 if(col != this.columns - 1){
-                    this.maze[row][col].neighbours.add(new Node(false, row, col + 1));
+                    this.maze[row][col].neighbours.add(maze[row][col+1]);
                 }
             }
         }
     }
 
+//    Not finished
+    public void drawMaze() {
+        for (int row = 0; row < this.rows; row++) {
+            System.out.println(" ");
+            for (int col = 0; col < this.columns; col++) {
+
+                for (int i = 0; i < 3; i++) {
+//                    Draw celling
+                    if(row == 0 && i == 0){
+                        System.out.print("---");
+                    }
+                    if(col == 0 || col == this.columns - 1){
+                        System.out.print("|");
+                    }
+                    else{
+                        System.out.print(" ");
+                    }
+
+                }
+            }
+
+        }
+    }
+
+
+
     private void DFS(Node actualV){
         actualV.isVisited = true;
+        Collections.shuffle(actualV.neighbours);
         for (Node neighbour: actualV.neighbours) {
             if (!(neighbour.isVisited)){
                 actualV.edgesTo.add(neighbour);
+                neighbour.edgesTo.add(actualV);
                 DFS(neighbour);
             }
         }
@@ -49,6 +80,7 @@ public class Maze {
         this.columns = columns;
         generateEmptyGraph();
         generateNeighbours();
+        DFS(maze[0][0]);
     }
 
 
