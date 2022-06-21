@@ -9,6 +9,7 @@ public class Maze implements AMaze {
     private int rows = 10;
     public Node[][] maze;
 
+//    Generate empty graph without connections between them
     private void generateEmptyGraph(){
         Node[][] innerMaze = new Node[this.rows][this.columns];
         for (int row = 0; row < this.rows; row++) {
@@ -19,6 +20,7 @@ public class Maze implements AMaze {
         this.maze = innerMaze;
     }
 
+//    Simply generates connections with neighbours in maze graph
     private void generateNeighbours(){
         for (int row = 0; row < this.rows; row++) {
             for (int col = 0; col < this.columns; col++) {
@@ -38,7 +40,7 @@ public class Maze implements AMaze {
         }
     }
 
-    //    Not finished
+    //    Draw maze in console
     public void drawMaze() {
         for(int i=0;i<rows;i++) {
             System.out.print("@@");
@@ -94,6 +96,8 @@ public class Maze implements AMaze {
         }
         DFS(maze[0][0]);
     }
+
+//    Maze maker, using DFS graph traversal method
     private void DFS(Node actualV){
         actualV.isVisited = true;
         Collections.shuffle(actualV.neighbours);
@@ -106,6 +110,7 @@ public class Maze implements AMaze {
         }
     }
 
+//    save maze to a file given by user in Labirynty/ directory
     public void save(String name){
         try{
             FileWriter writer = new FileWriter("Labirynty/" + name);
