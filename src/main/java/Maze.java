@@ -2,7 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 
-public class Maze {
+public class Maze implements AMaze {
 
     //    columns and rows
     private int columns = 10;
