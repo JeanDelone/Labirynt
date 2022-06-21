@@ -7,6 +7,8 @@ public class Main {
         Maze maze2 = new Maze(rows, columns);
 
         maze2.drawMaze();
+        maze2.remakeMaze();
+        maze2.drawMaze();
         maze2.save("Labirynt1");
 
 

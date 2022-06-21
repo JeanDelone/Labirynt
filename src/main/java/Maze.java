@@ -84,8 +84,16 @@ public class Maze implements AMaze {
 
     }
 
-
-
+//    Just remake maze if user doesn't like current one :)
+    public void remakeMaze(){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns ; j++) {
+                maze[i][j].edgesTo.clear();
+                maze[i][j].isVisited = false;
+            }
+        }
+        DFS(maze[0][0]);
+    }
     private void DFS(Node actualV){
         actualV.isVisited = true;
         Collections.shuffle(actualV.neighbours);
@@ -102,10 +110,8 @@ public class Maze implements AMaze {
         try{
             FileWriter writer = new FileWriter("Labirynty/" + name);
             for(int i=0;i<rows;i++) {
-
                 writer.append("@@");
             }
-
             writer.append("\n");
             for(int c=0;c<columns;c++) {
                 if( c == 0){
@@ -125,11 +131,8 @@ public class Maze implements AMaze {
                         writer.append(".");
                     }
                 }
-
                 writer.append(".");
-
                 writer.append("\n@");
-
                 writer.append("@");
                 for(int r=0;r<rows;r++) {
                     if(c == columns - 1) {
@@ -142,10 +145,8 @@ public class Maze implements AMaze {
 
                         writer.append("@");
                     }
-
                     writer.append("@");
                 }
-
                 writer.append("\n");
             }
             writer.close();

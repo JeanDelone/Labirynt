@@ -1,5 +1,8 @@
 public interface AMaze {
 
+//    Self-explanatory, recreate currently existing maze
+    void remakeMaze();
+
 //    Saves generated maze to a file that user's type name in
 //    It will be saved in Labirynty/ directory
     void save(String name);
