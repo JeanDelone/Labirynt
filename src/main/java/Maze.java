@@ -1,9 +1,10 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
 
 public class Maze {
 
-//    columns and rows
+    //    columns and rows
     private int columns = 10;
     private int rows = 10;
     public Node[][] maze;
@@ -37,28 +38,50 @@ public class Maze {
         }
     }
 
-//    Not finished
+    //    Not finished
     public void drawMaze() {
-        for (int row = 0; row < this.rows; row++) {
-            System.out.println(" ");
-            for (int col = 0; col < this.columns; col++) {
-
-                for (int i = 0; i < 3; i++) {
-//                    Draw celling
-                    if(row == 0 && i == 0){
-                        System.out.print("---");
-                    }
-                    if(col == 0 || col == this.columns - 1){
-                        System.out.print("|");
-                    }
-                    else{
-                        System.out.print(" ");
-                    }
-
-                }
+        for(int i=0;i<rows;i++) {
+            System.out.print("@@");
+        }
+        System.out.println();
+        for(int c=0;c<columns;c++) {
+            if(c == 0){
+                System.out.print("$");
             }
 
+            else{
+                System.out.print("@");
+            }
+            for(int r=0;r<rows-1;r++) {
+                System.out.print(".");
+                if(maze[r][c].edgesTo.contains(maze[r+1][c])) {
+                    System.out.print(".");
+                }
+                else {
+                    System.out.print("@");
+                }
+            }
+            System.out.print(".");
+            if(c == columns - 1){
+                System.out.println("#");
+            }
+            else{
+                System.out.println("@");
+            }
+            System.out.print("@");
+            for(int r=0;r<rows;r++) {
+                if(c == columns - 1) {
+                    System.out.print("@@");
+                } else if(maze[r][c].edgesTo.contains(maze[r][c+1])) {
+                    System.out.print(".");
+                }else {
+                    System.out.print("@");
+                }
+                System.out.print("@");
+            }
+            System.out.println();
         }
+
     }
 
 
@@ -72,6 +95,63 @@ public class Maze {
                 neighbour.edgesTo.add(actualV);
                 DFS(neighbour);
             }
+        }
+    }
+
+    public void save(String name){
+        try{
+            FileWriter writer = new FileWriter("Labirynty/" + name);
+            for(int i=0;i<rows;i++) {
+
+                writer.append("@@");
+            }
+
+            writer.append("\n");
+            for(int c=0;c<columns;c++) {
+                if( c == 0){
+                    writer.append("$");
+                }
+                else{
+                    writer.append("@");
+                }
+                for(int r=0;r<rows-1;r++) {
+
+                    writer.append(".");
+                    if(maze[r][c].edgesTo.contains(maze[r+1][c])) {
+
+                        writer.append(".");
+                    }else {
+
+                        writer.append(".");
+                    }
+                }
+
+                writer.append(".");
+
+                writer.append("\n@");
+
+                writer.append("@");
+                for(int r=0;r<rows;r++) {
+                    if(c == columns - 1) {
+
+                        writer.append("@@");
+                    } else if(maze[r][c].edgesTo.contains(maze[r][c+1])) {
+
+                        writer.append(".");
+                    }else {
+
+                        writer.append("@");
+                    }
+
+                    writer.append("@");
+                }
+
+                writer.append("\n");
+            }
+            writer.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
     }
 
